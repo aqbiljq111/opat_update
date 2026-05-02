@@ -38,11 +38,11 @@ Buka file `.env` dan sesuaikan pengaturan database Anda:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=nama_database_anda
+DB_DATABASE=opat_update
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-*Catatan: Pastikan Anda sudah membuat database kosong dengan nama yang sesuai di phpMyAdmin.*
+*Catatan: Pastikan Anda sudah membuat database kosong dengan nama `opat_update` di phpMyAdmin.*
 
 ### 4. Generate App Key
 ```bash
