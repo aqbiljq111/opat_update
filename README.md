@@ -87,4 +87,4 @@ Aplikasi akan tersedia di [http://127.0.0.1:8000](http://127.0.0.1:8000).
 - **Responsive Design:** Desain yang dioptimalkan untuk berbagai perangkat.
 
 ---
-Dikembangkan oleh **aqbiljq111**.
+Dikembangkan oleh **aqbiljq111 dan Gemini**.
