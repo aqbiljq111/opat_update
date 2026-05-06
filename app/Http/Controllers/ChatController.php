@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\MessageLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,10 +38,18 @@ class ChatController extends Controller
             'message' => 'required'
         ]);
         
-        Message::create([
+        $msg = Message::create([
             'sender_id' => Auth::id(),
             'title' => $request->title,
             'message' => $request->message
+        ]);
+
+        MessageLog::create([
+            'user_id' => Auth::id(),
+            'message_id' => $msg->id,
+            'title' => $request->title,
+            'message' => $request->message,
+            'action' => 'created'
         ]);
 
         return back()->with('success', 'Pertanyaan berhasil diposting');
@@ -84,13 +93,59 @@ class ChatController extends Controller
         }
         // If not replying to a thread (meaning it's a nested reply), anyone can reply to it.
 
-        Message::create([
+        $reply = Message::create([
             'sender_id' => $user->id,
             'parent_id' => $id,
             'message' => $request->message
         ]);
 
+        MessageLog::create([
+            'user_id' => $user->id,
+            'message_id' => $reply->id,
+            'parent_id' => $id,
+            'message' => $request->message,
+            'action' => 'replied'
+        ]);
+
         return back()->with('success', 'Balasan berhasil dikirim');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $message = Message::findOrFail($id);
+        $user = Auth::user();
+
+        // Only owner can edit. Admin/Guru can delete but not edit others' posts? 
+        // Usually, only the sender can edit. Let's stick to that.
+        if ($message->sender_id !== $user->id) {
+            return back()->with('error', 'Anda tidak memiliki akses untuk mengedit pesan ini.');
+        }
+
+        $rules = [
+            'message' => 'required'
+        ];
+
+        if ($message->parent_id === null) {
+            $rules['title'] = 'required|max:255';
+        }
+
+        $request->validate($rules);
+
+        $message->update([
+            'title' => $request->title ?? $message->title,
+            'message' => $request->message
+        ]);
+
+        MessageLog::create([
+            'user_id' => $user->id,
+            'message_id' => $message->id,
+            'parent_id' => $message->parent_id,
+            'title' => $request->title ?? $message->title,
+            'message' => $request->message,
+            'action' => 'updated'
+        ]);
+
+        return back()->with('success', 'Pesan berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -104,6 +159,16 @@ class ChatController extends Controller
         }
 
         $isThread = $message->parent_id === null;
+
+        MessageLog::create([
+            'user_id' => $user->id,
+            'message_id' => $message->id,
+            'parent_id' => $message->parent_id,
+            'title' => $message->title,
+            'message' => $message->message,
+            'action' => 'deleted'
+        ]);
+
         $message->delete();
 
         if ($isThread) {

@@ -19,16 +19,40 @@
             <span>•</span>
             <span>{{ $message->created_at->diffForHumans() }}</span>
         </div>
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">{{ $message->title }}</h1>
-        <div class="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap mb-6">
-            {{ $message->message }}
+        <div id="content-{{ $message->id }}">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">{{ $message->title }}</h1>
+            <div class="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap mb-6">
+                {{ $message->message }}
+            </div>
         </div>
+
+        @if(Auth::id() == $message->sender_id)
+        <div id="edit-form-{{ $message->id }}" class="hidden mb-6">
+            <form action="{{ route('chat.update', $message->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="text" name="title" value="{{ $message->title }}" required class="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-blue-100 dark:border-slate-700 rounded-lg outline-none focus:ring-2 focus:ring-teal-500 mb-2 font-bold dark:text-white">
+                <textarea name="message" required rows="5" class="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-blue-100 dark:border-slate-700 rounded-lg outline-none focus:ring-2 focus:ring-teal-500 mb-2 dark:text-white">{{ $message->message }}</textarea>
+                <div class="flex justify-end gap-2">
+                    <button type="button" onclick="document.getElementById('edit-form-{{ $message->id }}').classList.add('hidden'); document.getElementById('content-{{ $message->id }}').classList.remove('hidden')" class="px-3 py-1.5 text-gray-500 text-sm hover:bg-gray-100 rounded-lg">Batal</button>
+                    <button type="submit" class="px-4 py-1.5 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-semibold rounded-lg text-sm hover:from-teal-600 hover:to-blue-700">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+        @endif
         
         <div class="flex items-center gap-4 pt-4 border-t border-gray-100 dark:border-slate-700">
             <button onclick="document.getElementById('reply-form-{{ $message->id }}').classList.toggle('hidden')" class="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700 px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors">
                 <i class="far fa-comment-alt"></i>
                 Jawab
             </button>
+
+            @if(Auth::id() == $message->sender_id)
+            <button onclick="document.getElementById('edit-form-{{ $message->id }}').classList.remove('hidden'); document.getElementById('content-{{ $message->id }}').classList.add('hidden')" class="flex items-center gap-2 text-teal-600 hover:bg-teal-50 px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors">
+                <i class="far fa-edit"></i>
+                Edit
+            </button>
+            @endif
 
             @if(Auth::user()->role == 'admin' || Auth::user()->role == 'guru' || Auth::id() == $message->sender_id)
             <form action="{{ route('chat.destroy', $message->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pertanyaan ini beserta seluruh balasannya?');" class="ml-auto">

@@ -21,9 +21,23 @@
                 <time class="text-gray-500 dark:text-gray-400">{{ $reply->created_at->diffForHumans(short: true) }}</time>
             </header>
 
-            <div class="text-gray-700 dark:text-gray-300 text-sm whitespace-pre-wrap mb-3">
+            <div id="reply-content-{{ $reply->id }}" class="text-gray-700 dark:text-gray-300 text-sm whitespace-pre-wrap mb-3">
                 {{ $reply->message }}
             </div>
+
+            @if(Auth::id() == $reply->sender_id)
+            <div id="reply-edit-form-{{ $reply->id }}" class="hidden mb-3">
+                <form action="{{ route('chat.update', $reply->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <textarea name="message" required rows="3" class="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-blue-100 dark:border-slate-700 rounded-lg outline-none focus:ring-2 focus:ring-teal-500 mb-2 text-sm dark:text-white">{{ $reply->message }}</textarea>
+                    <div class="flex justify-end gap-2">
+                        <button type="button" onclick="document.getElementById('reply-edit-form-{{ $reply->id }}').classList.add('hidden'); document.getElementById('reply-content-{{ $reply->id }}').classList.remove('hidden')" class="px-3 py-1 text-gray-500 text-[10px] hover:bg-gray-100 rounded-lg">Batal</button>
+                        <button type="submit" class="px-4 py-1 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-semibold rounded-lg text-[10px] hover:from-teal-600 hover:to-blue-700">Simpan</button>
+                    </div>
+                </form>
+            </div>
+            @endif
 
             {{-- Action Toolbar --}}
             <footer class="flex items-center gap-4">
@@ -31,6 +45,13 @@
                         class="text-xs font-bold text-gray-500 hover:text-blue-600 transition-colors">
                     <i class="fas fa-reply mr-1"></i> Balas
                 </button>
+
+                @if(Auth::id() == $reply->sender_id)
+                <button onclick="document.getElementById('reply-edit-form-{{ $reply->id }}').classList.toggle('hidden'); document.getElementById('reply-content-{{ $reply->id }}').classList.toggle('hidden')" 
+                        class="text-xs font-bold text-teal-600 hover:text-teal-700 transition-colors">
+                    <i class="fas fa-edit mr-1"></i> Edit
+                </button>
+                @endif
 
                 @if(Auth::user()->role == 'admin' || Auth::user()->role == 'guru' || Auth::id() == $reply->sender_id)
                 <form action="{{ route('chat.destroy', $reply->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus balasan ini beserta balasannya (jika ada)?');" class="ml-auto">

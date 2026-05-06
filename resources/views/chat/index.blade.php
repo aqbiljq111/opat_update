@@ -18,9 +18,17 @@
 @endpush
 <main class="max-w-4xl mx-auto px-4 py-8 w-full">
     {{-- Page Header --}}
-    <header class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight">Forum Tanya Jawab</h1>
-        <p class="text-gray-600 dark:text-gray-400">Berdiskusi, bertanya, dan temukan jawaban dari para guru.</p>
+    <header class="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight">Forum Tanya Jawab</h1>
+            <p class="text-gray-600 dark:text-gray-400">Berdiskusi, bertanya, dan temukan jawaban dari para guru.</p>
+        </div>
+        @if(Auth::user()->role == 'admin' || Auth::user()->role == 'guru')
+        <a href="{{ route('chat.history') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+            <i class="fas fa-history text-teal-500"></i>
+            Riwayat Aktivitas
+        </a>
+        @endif
     </header>
 
     {{-- Ask Question Section --}}

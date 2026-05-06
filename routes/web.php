@@ -28,10 +28,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/chat', [ChatController::class, 'store'])->name('chat.store');
     Route::get('/chat/{id}', [ChatController::class, 'show'])->name('chat.show');
     Route::post('/chat/{id}/reply', [ChatController::class, 'reply'])->name('chat.reply');
+    Route::put('/chat/{id}', [ChatController::class, 'update'])->name('chat.update');
     Route::delete('/chat/{id}', [ChatController::class, 'destroy'])->name('chat.destroy');
 
     // Admin & Guru Routes (Atur Jadwal/Pengumuman)
     Route::middleware('can:atur-pengumuman')->group(function () {
+        Route::get('/chat-history', [\App\Http\Controllers\MessageLogController::class, 'index'])->name('chat.history');
         Route::post('/announcement', [DashboardController::class, 'storeAnnouncement'])->name('announcement.store');
         Route::put('/announcement/{id}', [DashboardController::class, 'updateAnnouncement'])->name('announcement.update');
         Route::delete('/announcement/{id}', [DashboardController::class, 'destroyAnnouncement'])->name('announcement.destroy');
