@@ -1,90 +1,82 @@
 # OpatUpdate - Sistem Manajemen Forum & Pengumuman
 
-OpatUpdate adalah aplikasi berbasis Laravel yang dirancang untuk manajemen pengumuman dan forum interaktif antara Admin, Guru, dan Siswa.
+## 📝 Deskripsi Proyek
+OpatUpdate adalah aplikasi berbasis Laravel yang dirancang untuk memfasilitasi manajemen pengumuman dan forum interaktif dalam lingkungan pendidikan. Aplikasi ini memungkinkan komunikasi yang terstruktur antara Admin, Guru, dan Siswa, memastikan informasi penting tersampaikan dengan cepat dan diskusi akademik dapat berjalan dengan baik.
 
-## Prasyarat (Requirements)
+## ✨ Fitur Utama
+- **Sistem Role & Autentikasi:** Hak akses yang berbeda untuk Admin, Guru, dan Siswa.
+- **Forum Diskusi:** Siswa dapat membuat pertanyaan dan berdiskusi dalam thread yang terorganisir.
+- **Manajemen Pengumuman:** Fitur bagi Admin dan Guru untuk memposting informasi penting ke seluruh pengguna.
+- **Desain Responsif:** Antarmuka modern yang optimal diakses melalui berbagai perangkat (Desktop & Mobile).
+- **Keamanan Data:** Implementasi middleware dan proteksi Laravel untuk keamanan akun.
 
-Sebelum menginstal, pastikan Anda telah menginstal software berikut di komputer Anda:
-- **PHP** >= 8.2 (Sangat disarankan menggunakan versi terbaru)
-- **Composer** (Dependency manager untuk PHP)
-- **Node.js & NPM** (Untuk kompilasi asset frontend/Vite)
-- **XAMPP / Laragon** (Untuk MySQL dan Apache/Nginx server)
+## 🛠️ Tech Stack we use
+- **Backend:** [Laravel 11](https://laravel.com/)
+- **Frontend:** Blade Templates, Vanilla CSS (Custom Styling)
+- **Asset Manager:** Vite
+- **Database:** MySQL
+- **Server:** Apache (XAMPP)
 
-## Cara Instalasi
+## 🎥 Video Demo
 
-Ikuti langkah-langkah di bawah ini untuk menjalankan project ini di komputer lokal Anda:
+[![Video Demo](https://img.shields.io/badge/Video-Demo-red?style=for-the-badge&logo=youtube)](https://link-video-anda.com)
 
-### 1. Clone Repository
-Buka terminal/command prompt, lalu jalankan:
-```bash
-git clone https://github.com/aqbiljq111/opat_update.git
-cd opat_update
-```
 
-### 2. Instal Dependency PHP
-Jalankan perintah berikut untuk menginstal package yang dibutuhkan oleh Laravel:
-```bash
-composer install
-```
+## 📸 Screenshot Website
 
-### 3. Konfigurasi Environment
-Salin file `.env.example` menjadi `.env`:
-```bash
-cp .env.example .env
-```
+| Login Page | Dashboard |
+| :---: | :---: |
+| ![Login Page](https://via.placeholder.com/400x250?text=Screenshot+Login) | ![Dashboard](https://via.placeholder.com/400x250?text=Screenshot+Dashboard) |
 
-Buka file `.env` dan sesuaikan pengaturan database Anda:
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=opat_update
-DB_USERNAME=root
-DB_PASSWORD=
-```
-*Catatan: Pastikan Anda sudah membuat database kosong dengan nama `opat_update` di phpMyAdmin.*
+| Forum Diskusi | Detail Pengumuman |
+| :---: | :---: |
+| ![Forum](https://via.placeholder.com/400x250?text=Screenshot+Forum) | ![Pengumuman](https://via.placeholder.com/400x250?text=Screenshot+Pengumuman) |
 
-### 4. Generate App Key
-```bash
-php artisan key:generate
-```
+## 👥 Kelompok & Anggota
+**Nama Kelompok:** [Kelompok 6]
 
-### 5. Migrasi Database & Seeding
-Jalankan migrasi untuk membuat tabel dan masukkan data awal (admin):
-```bash
-php artisan migrate --seed
-```
-*Atau jika Anda ingin menjalankan seeder spesifik untuk admin:*
-```bash
-php artisan db:seed --class=AdminSeeder
-```
+- **Anggota 1:** [Aqbil Rashif Anshari]
+- **Anggota 2:** [Krysa Putri Hidayah]
+- **Anggota 3:** [Yaser Alfonso]
 
-### 6. Instal Dependency Frontend
-Kompilasi asset menggunakan Vite:
-```bash
-npm install
-npm run dev
-```
+---
 
-## Akun Login Default (Admin)
+## 🚀 Panduan Instalasi
 
-Gunakan akun berikut untuk login pertama kali sebagai Admin:
+### 1. Prasyarat (Requirements)
+- **PHP** >= 8.2
+- **Composer**
+- **Node.js & NPM**
+- **MySQL (XAMPP / Laragon)**
+
+### 2. Langkah Instalasi
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/aqbiljq111/opat_update.git
+   cd opat_update
+   ```
+2. **Instal Dependency**
+   ```bash
+   composer install
+   npm install
+   ```
+3. **Konfigurasi .env**
+   - Salin `.env.example` ke `.env`
+   - Sesuaikan pengaturan `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD`.
+4. **Generate Key & Migrasi**
+   ```bash
+   php artisan key:generate
+   php artisan migrate --seed
+   ```
+5. **Jalankan Aplikasi**
+   ```bash
+   npm run dev
+   php artisan serve
+   ```
+
+## 🔐 Akun Default (Admin)
 - **Username:** `admin_utama`
 - **Password:** `rahasia123`
 
-## Menjalankan Aplikasi
-
-Jalankan perintah berikut untuk memulai server lokal:
-```bash
-php artisan serve
-```
-Aplikasi akan tersedia di [http://127.0.0.1:8000](http://127.0.0.1:8000).
-
-## Fitur Utama
-- **Role System:** Admin, Guru, dan Siswa.
-- **Forum Diskusi:** Siswa dapat bertanya dan berdiskusi di thread forum.
-- **Pengumuman:** Admin dan Guru dapat memposting pengumuman penting.
-- **Responsive Design:** Desain yang dioptimalkan untuk berbagai perangkat.
-
 ---
-Dikembangkan oleh **aqbiljq111 dan Gemini**.
+*Dikembangkan untuk keperluan manajemen informasi dan forum sekolah.*
