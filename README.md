@@ -19,18 +19,18 @@ OpatUpdate adalah aplikasi berbasis Laravel yang dirancang untuk memfasilitasi m
 
 ## 🎥 Video Demo
 
-[![Video Demo](https://img.shields.io/badge/Video-Demo-red?style=for-the-badge&logo=youtube)](https://link-video-anda.com)
+(https://drive.google.com/file/d/1zXkQ-Gux7F-bFfP0jlQXqJ3beKUUd6ME/view?usp=sharing)
 
 
 ## 📸 Screenshot Website
 
 | Login Page | Dashboard |
 | :---: | :---: |
-| ![Login Page](https://via.placeholder.com/400x250?text=Screenshot+Login) | ![Dashboard](https://via.placeholder.com/400x250?text=Screenshot+Dashboard) |
+| <img width="400" height="250" alt="Screenshot 2026-05-13 162017" src="https://github.com/user-attachments/assets/3b7f4b3d-634b-4f9a-a40e-7613150e670b" /> | <img width="400" height="250" alt="Screenshot 2026-05-13 163621" src="https://github.com/user-attachments/assets/e623dafd-12f3-42a2-bcb0-0bec121c067f" /> |
 
 | Forum Diskusi | Detail Pengumuman |
 | :---: | :---: |
-| ![Forum](https://via.placeholder.com/400x250?text=Screenshot+Forum) | ![Pengumuman](https://via.placeholder.com/400x250?text=Screenshot+Pengumuman) |
+| <img width="400" height="250" alt="Screenshot 2026-05-13 163810" src="https://github.com/user-attachments/assets/a80f687a-47d1-456d-8fff-f934c0f968de" /> <img width="400" height="250" alt="Screenshot 2026-05-13 164240" src="https://github.com/user-attachments/assets/446148d5-a37d-461a-a8ab-73cbd82a74da" /> | <img width="400" height="250" alt="Screenshot 2026-05-13 164456" src="https://github.com/user-attachments/assets/88b656fc-94bb-4693-8f7f-920a79c6e4cf" /> |
 
 ## 👥 Kelompok & Anggota
 **Nama Kelompok:** [Kelompok 6]
